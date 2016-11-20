@@ -8,8 +8,6 @@ If there's time, I'll add a mini facial-recognition game.
 
 ## Design Layout
 
-Click on the links below to see the layout:
-
 ![Splash Page](https://cloud.githubusercontent.com/assets/18515426/20460680/1624327a-aeb9-11e6-9780-937f9ce402d2.png)
 
 ![Countdown: 3](https://cloud.githubusercontent.com/assets/18515426/20460571/1becd6de-aeb5-11e6-9271-fb6ea26c0839.png)
@@ -22,7 +20,11 @@ Click on the links below to see the layout:
 
 ![Matching your face](https://cloud.githubusercontent.com/assets/18515426/20460578/62d6267c-aeb5-11e6-9703-762fac67f57b.png)
 
+If it's a match:
+
 ![Successful login](https://cloud.githubusercontent.com/assets/18515426/20460581/706df9fe-aeb5-11e6-93d5-3995fbfad1b8.png)
+
+If it's not a match, the process will start over.
 
 ## Breakdown of Roles
 
