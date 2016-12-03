@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -51,6 +53,8 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'image' => 'required|max:255',
+            'gallery_name' => 'required|max:255'
         ]);
     }
 
@@ -62,10 +66,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $path = $data['image']->store($data['gallery_name'])
+        // $handle = fopen($_FILES["UploadFileName"]["tmp_name"], 'r');
+        
+        // Creates a URL to be stored in the db
+        $halfpath = $data['gallery_name'] . "/" . $data['image'];
+        $url = Storage::url($halfpath);
+        //$url = Storage::url($data['image']);
+
+        // Uploads the image file to S3
+/*        $path = Storage::putFile(
+            $data['gallery_name'], $request->file($data['image'])
+        );
+
+echo $url;
+die;*/
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+//            'image' => $data['image'],
+            'image' => $url,
+            'gallery_name' => $data['gallery_name']
         ]);
     }
 }
