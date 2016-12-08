@@ -28,7 +28,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     public $url;
-    public $halfURL;
+/*    public $halfURL;*/
 
     /**
      * Where to redirect users after registration.
@@ -72,15 +72,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        GLOBAL $url, $halfURL;
+        GLOBAL $url;
 
-        // Creates a URL to be stored in the db
+/*        // Creates a URL to be stored in the db
         $gallery = $data['gallery_name'];
         $img = $data['image'];
         $halfURL = $gallery . "/" . $img;  // From user input
-        $url = Storage::url($halfURL);  // From config/filesystems.php
+        $url = Storage::url($halfURL);  // From config/filesystems.php*/
 
-        RegisterController::uploadFileToS3($img);
+        RegisterController::uploadFileToS3($data['image']);
 
         return User::create([
             'name' => $data['name'],
@@ -99,26 +99,42 @@ class RegisterController extends Controller
      */
     public function uploadFileToS3($data)
     {
+        GLOBAL $url;
+
+/*print_r($data->getMimeType());
+die;*/
+
         // Create an S3 Client object
         $s3 = App::make('aws')->createClient('s3');
 
         // Send a PutObject request
         $s3->putObject([
             'Bucket' => 'face-on-bucket',
-            'Key'    => 'AKIAJGVM46L2RHCVU2NA',
-/*            'SourceFile'   => $data,*/
-            'SourceFile'   => 'C:\Users\angsu\Desktop\Bert.jpg',
+            'Key'    => $data->getClientOriginalName(),
+            'SourceFile'   => $data->getRealPath(),
+            'ResponseContentType'   => $data->getMimeType(),
+            //'SourceFile'   => 'C:\Users\angsu\Desktop\\' . $data->getClientOriginalName(),            
         ]);
 
+        $url = $s3->getObjectUrl('face-on-bucket', $data->getClientOriginalName());
+    }
 
+    /**
+     * Download image file from Amazon S3.
+     *
+     * @param $data Image filename
+     * @return Response
+     */
+    public function downloadFileFromS3($data)
+    {
+        // Send a GetObject request
+        $s3->getObject([
+            'Bucket' => 'face-on-bucket',
+            'Key'    => 'AKIAJGVM46L2RHCVU2NA',
+/*            'SourceFile'   => $data,*/
+            'SaveAs'   => 'C:\Users\angsu\Desktop', // The path to a file to save the obj data
+        ]);
 
-/*        $image = $request->file('image');*/
-
-/*        GLOBAL $url, $halfURL;
-
-        $disk = \Storage::disk('s3');
-        $disk->put($halfURL, fopen('C:\Users\angsu\Desktop\Bert.jpg', 'r+'), 'public');*/
-        //$disk->put($halfURL, file_get_contents('C:\Users\angsu\Desktop\Bert.jpg'), 'public');
 
 /*echo $halfURL;
 ?><br><br><?php
@@ -126,6 +142,6 @@ echo $url;
 ?><br><br><?php
 var_dump($data);
 die;*/
-    }
 
+    }
 }
