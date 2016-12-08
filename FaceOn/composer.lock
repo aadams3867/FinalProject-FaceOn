@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "004a41775b9513f849fe241abf8c5be6",
-    "content-hash": "8905feb97d2cf75b31154f16bf315238",
+    "hash": "a3850a15edffd9ec5d4a6123a2bdc2c1",
+    "content-hash": "540f1f3b6daee1c08a62acf182005ee6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.20.1",
+            "version": "3.20.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c83afe188b2f462840a5ab12d43f2e83f356f3f0"
+                "reference": "da0d8955770c3c84007bfe7c652351af2c031068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c83afe188b2f462840a5ab12d43f2e83f356f3f0",
-                "reference": "c83afe188b2f462840a5ab12d43f2e83f356f3f0",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/da0d8955770c3c84007bfe7c652351af2c031068",
+                "reference": "da0d8955770c3c84007bfe7c652351af2c031068",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,63 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-12-01 19:25:12"
+            "time": "2016-12-07 22:50:22"
+        },
+        {
+            "name": "aws/aws-sdk-php-laravel",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php-laravel.git",
+                "reference": "3b946892d493b91b4920ec4facc4a0ad7195fb86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php-laravel/zipball/3b946892d493b91b4920ec4facc4a0ad7195fb86",
+                "reference": "3b946892d493b91b4920ec4facc4a0ad7195fb86",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "~3.0",
+                "illuminate/support": "~5.1",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0|~5.0"
+            },
+            "suggest": {
+                "laravel/framework": "To test the Laravel bindings",
+                "laravel/lumen-framework": "To test the Lumen bindings"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aws\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Amazon Web Services",
+                    "homepage": "http://aws.amazon.com"
+                }
+            ],
+            "description": "A simple Laravel 5 service provider for including the AWS SDK for PHP.",
+            "homepage": "http://aws.amazon.com/sdkforphp2",
+            "keywords": [
+                "amazon",
+                "aws",
+                "dynamodb",
+                "ec2",
+                "laravel",
+                "laravel 5",
+                "s3",
+                "sdk"
+            ],
+            "time": "2016-01-18 06:57:07"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -501,20 +557,20 @@
         },
         {
             "name": "jeremeamia/SuperClosure",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeremeamia/super_closure.git",
-                "reference": "29a88be2a4846d27c1613aed0c9071dfad7b5938"
+                "reference": "443c3df3207f176a1b41576ee2a66968a507b3db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeremeamia/super_closure/zipball/29a88be2a4846d27c1613aed0c9071dfad7b5938",
-                "reference": "29a88be2a4846d27c1613aed0c9071dfad7b5938",
+                "url": "https://api.github.com/repos/jeremeamia/super_closure/zipball/443c3df3207f176a1b41576ee2a66968a507b3db",
+                "reference": "443c3df3207f176a1b41576ee2a66968a507b3db",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^1.2|^2.0",
+                "nikic/php-parser": "^1.2|^2.0|^3.0",
                 "php": ">=5.4",
                 "symfony/polyfill-php56": "^1.0"
             },
@@ -524,7 +580,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -555,7 +611,7 @@
                 "serialize",
                 "tokenizer"
             ],
-            "time": "2015-12-05 17:17:57"
+            "time": "2016-12-07 09:37:55"
         },
         {
             "name": "laravel/framework",
@@ -939,16 +995,16 @@
         },
         {
             "name": "mtdowling/jmespath.php",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jmespath/jmespath.php.git",
-                "reference": "192f93e43c2c97acde7694993ab171b3de284093"
+                "reference": "adcc9531682cf87dfda21e1fd5d0e7a41d292fac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/192f93e43c2c97acde7694993ab171b3de284093",
-                "reference": "192f93e43c2c97acde7694993ab171b3de284093",
+                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/adcc9531682cf87dfda21e1fd5d0e7a41d292fac",
+                "reference": "adcc9531682cf87dfda21e1fd5d0e7a41d292fac",
                 "shasum": ""
             },
             "require": {
@@ -990,7 +1046,7 @@
                 "json",
                 "jsonpath"
             ],
-            "time": "2016-01-05 18:25:05"
+            "time": "2016-12-03 22:08:25"
         },
         {
             "name": "nesbot/carbon",
@@ -2983,16 +3039,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.1",
+            "version": "5.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0158307fae98f8013eeac2ff2803fe8d4f6bc1a0"
+                "reference": "336aff0ac52e306c98e7455bc3e8d7b0bf777a5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0158307fae98f8013eeac2ff2803fe8d4f6bc1a0",
-                "reference": "0158307fae98f8013eeac2ff2803fe8d4f6bc1a0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/336aff0ac52e306c98e7455bc3e8d7b0bf777a5e",
+                "reference": "336aff0ac52e306c98e7455bc3e8d7b0bf777a5e",
                 "shasum": ""
             },
             "require": {
@@ -3061,7 +3117,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-02 12:03:05"
+            "time": "2016-12-03 08:33:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

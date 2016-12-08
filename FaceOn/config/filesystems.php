@@ -58,7 +58,7 @@ return [
             'driver' => 's3',
             'key' => 'AKIAJGVM46L2RHCVU2NA',
             'secret' => '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',
-            'region' => 'Ohio',
+            'region' => 'us-east-2',
             'bucket' => 'face-on-bucket',
         ],
 

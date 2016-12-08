@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Input;
+use App;
 
 class RegisterController extends Controller
 {
@@ -23,6 +26,9 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    public $url;
+    public $halfURL;
 
     /**
      * Where to redirect users after registration.
@@ -66,29 +72,60 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $path = $data['image']->store($data['gallery_name'])
-        // $handle = fopen($_FILES["UploadFileName"]["tmp_name"], 'r');
-        
+        GLOBAL $url, $halfURL;
+
         // Creates a URL to be stored in the db
-        $halfpath = $data['gallery_name'] . "/" . $data['image'];
-        $url = Storage::url($halfpath);
-        //$url = Storage::url($data['image']);
+        $gallery = $data['gallery_name'];
+        $img = $data['image'];
+        $halfURL = $gallery . "/" . $img;  // From user input
+        $url = Storage::url($halfURL);  // From config/filesystems.php
 
-        // Uploads the image file to S3
-/*        $path = Storage::putFile(
-            $data['gallery_name'], $request->file($data['image'])
-        );
-
-echo $url;
-die;*/
+        RegisterController::uploadFileToS3($img);
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-//            'image' => $data['image'],
             'image' => $url,
             'gallery_name' => $data['gallery_name']
         ]);
     }
+
+    /**
+     * Upload image file to Amazon S3.
+     *
+     * @param $data Image filename
+     * @return Response
+     */
+    public function uploadFileToS3($data)
+    {
+        // Create an S3 Client object
+        $s3 = App::make('aws')->createClient('s3');
+
+        // Send a PutObject request
+        $s3->putObject([
+            'Bucket' => 'face-on-bucket',
+            'Key'    => 'AKIAJGVM46L2RHCVU2NA',
+/*            'SourceFile'   => $data,*/
+            'SourceFile'   => 'C:\Users\angsu\Desktop\Bert.jpg',
+        ]);
+
+
+
+/*        $image = $request->file('image');*/
+
+/*        GLOBAL $url, $halfURL;
+
+        $disk = \Storage::disk('s3');
+        $disk->put($halfURL, fopen('C:\Users\angsu\Desktop\Bert.jpg', 'r+'), 'public');*/
+        //$disk->put($halfURL, file_get_contents('C:\Users\angsu\Desktop\Bert.jpg'), 'public');
+
+/*echo $halfURL;
+?><br><br><?php
+echo $url;
+?><br><br><?php
+var_dump($data);
+die;*/
+    }
+
 }
