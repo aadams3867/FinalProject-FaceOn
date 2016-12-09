@@ -59,7 +59,6 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'image' => 'required|max:255',
-            /*'gallery_name' => 'required|max:255'*/
         ]);
     }
 
@@ -72,12 +71,6 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         GLOBAL $url;
-
-        // Creates a URL to be stored in the db
-/*      $gallery = $data['gallery_name'];
-        $img = $data['image'];
-        $halfURL = $gallery . "/" . $img;  // From user input
-        $url = Storage::url($halfURL);  // From config/filesystems.php*/
 
         RegisterController::uploadFileToS3($data['image'], $data['email']);
 
