@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 class KairosController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Download image file from Amazon S3.
      *
      * @param $data Image filename
