@@ -85,8 +85,8 @@ class RegisterController extends Controller
     /**
      * Upload image file to Amazon S3.
      *
-     * @param $data Image filename
-     * @return Response
+     * @param string $gallery (User gallery name)
+     * @param object $img (initial image data)
      */
     public function uploadFileToS3($gallery, $img)
     {
@@ -98,7 +98,7 @@ class RegisterController extends Controller
         // Assemble the 'gallery directory / file name' for S3
         $key = $gallery . '/' . $img->getClientOriginalName();
 
-        // Send a PutObject request
+        // Send a PutObject request to upload the file to S3
         $s3->putObject([
             'Bucket' => 'face-on-bucket',
             'Key'    => $key,
