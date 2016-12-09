@@ -20,6 +20,10 @@ Route::post('/kairos', 'KairosController@login');
 
 Auth::routes();
 
+// These two routes have to be AFTER Auth::routes() bec they overwrite default routes
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::get('/phase2', 'Auth\LoginController@showLoginForm')->name('phase2');
+
 Route::get('/test', 'TestController@index');
 
 Route::get('/home', 'HomeController@index');

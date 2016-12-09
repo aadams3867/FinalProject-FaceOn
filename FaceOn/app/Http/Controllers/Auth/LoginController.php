@@ -18,6 +18,16 @@ class LoginController extends Controller
     |
     */
 
+    /**
+     * Redirects attempt to bypass facial verification
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return redirect()->guest('kairos');
+    }
+
     use AuthenticatesUsers;
 
     /**
