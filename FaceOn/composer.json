@@ -24,7 +24,10 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": ["vendor/autoload.php"]
+        "files": [
+            "vendor/autoload.php",
+            "app/Kairos.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

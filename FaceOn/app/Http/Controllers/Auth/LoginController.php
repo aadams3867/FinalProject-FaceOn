@@ -20,6 +20,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    //$kairos = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
+
     /**
      * Where to redirect users after login.
      *

@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -33,6 +33,20 @@
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                            <label for="image" class="col-md-4 control-label">Selfie</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" required>
+
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>

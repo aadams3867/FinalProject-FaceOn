@@ -73,8 +73,8 @@ class RegisterController extends Controller
     {
         GLOBAL $url;
 
-/*        // Creates a URL to be stored in the db
-        $gallery = $data['gallery_name'];
+        // Creates a URL to be stored in the db
+/*      $gallery = $data['gallery_name'];
         $img = $data['image'];
         $halfURL = $gallery . "/" . $img;  // From user input
         $url = Storage::url($halfURL);  // From config/filesystems.php*/
@@ -113,31 +113,5 @@ class RegisterController extends Controller
         ]);
 
         $url = $s3->getObjectUrl('face-on-bucket', $img->getClientOriginalName());
-    }
-
-    /**
-     * Download image file from Amazon S3.
-     *
-     * @param $data Image filename
-     * @return Response
-     */
-    public function downloadFileFromS3($data)
-    {
-        // Send a GetObject request
-        $s3->getObject([
-            'Bucket' => 'face-on-bucket',
-            'Key'    => 'AKIAJGVM46L2RHCVU2NA',
-/*            'SourceFile'   => $data,*/
-            'SaveAs'   => 'C:\Users\angsu\Desktop', // The path to a file to save the obj data
-        ]);
-
-
-/*echo $halfURL;
-?><br><br><?php
-echo $url;
-?><br><br><?php
-var_dump($data);
-die;*/
-
     }
 }
