@@ -7,7 +7,7 @@ use App\Kairos;
 
 class KairosController extends Controller
 {
-	public $kairos_cred;
+	public $kairos;
 
     /**
      * Create a new controller instance.
@@ -37,11 +37,12 @@ class KairosController extends Controller
      */
     public function login(Request $request)
     {
-        GLOBAL $kairos_cred;
+        GLOBAL $kairos;
 
-		$kairos_cred = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
+        // Set up Kairos object with credentials
+		$kairos = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
 
-var_dump($kairos_cred);
+var_dump($kairos);
 die;
 
         // Call Kairos API to see if the image is recognized

@@ -20,4 +20,8 @@ Route::post('/kairos', 'KairosController@login');
 
 Auth::routes();
 
+Route::get('/test', function (){
+	return view('test');
+});
+
 Route::get('/home', 'HomeController@index');

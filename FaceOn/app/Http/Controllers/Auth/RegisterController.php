@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Input;
 use App;
+use App\Kairos;
 
 class RegisterController extends Controller
 {
@@ -28,6 +29,7 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     public $url;
+    public $kairos;
 
     /**
      * Where to redirect users after registration.
@@ -59,6 +61,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'image' => 'required|max:255',
+            'gallery_name' => 'required|max:255',
         ]);
     }
 
@@ -70,15 +73,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        GLOBAL $url;
+        GLOBAL $url, $kairos;
 
-        RegisterController::uploadFileToS3($data['email'], $data['image']);
+        // Upload the image file to Amazon S3
+        RegisterController::uploadFileToS3($data['gallery_name'], $data['image']);
 
+        // Set up Kairos object with credentials
+        $kairos = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
+
+        // Setup up array of data to submit to Kairos
+        $argumentArray = array(
+            'image' => $url,
+            'subject_id' => $data['name'],
+            'gallery_name' => $data['gallery_name']
+        );
+
+        // Enroll the image with Kairos for later facial recognition
+        $response = $kairos->enroll($argumentArray);
+
+        // Create the new user in the db
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'image' => $url,
+            'gallery_name' => $data['gallery_name'],
         ]);
     }
 
@@ -110,4 +129,5 @@ class RegisterController extends Controller
         // Assemble the URL for storing in the user table in the db
         $url = $s3->getObjectUrl('face-on-bucket', $key);
     }
+
 }
