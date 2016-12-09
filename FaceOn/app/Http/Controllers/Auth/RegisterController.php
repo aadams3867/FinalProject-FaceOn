@@ -28,7 +28,6 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     public $url;
-/*    public $halfURL;*/
 
     /**
      * Where to redirect users after registration.
@@ -80,7 +79,7 @@ class RegisterController extends Controller
         $halfURL = $gallery . "/" . $img;  // From user input
         $url = Storage::url($halfURL);  // From config/filesystems.php*/
 
-        RegisterController::uploadFileToS3($data['image']);
+        RegisterController::uploadFileToS3($data['image'], $data['gallery_name']);
 
         return User::create([
             'name' => $data['name'],
@@ -97,12 +96,9 @@ class RegisterController extends Controller
      * @param $data Image filename
      * @return Response
      */
-    public function uploadFileToS3($data)
+    public function uploadFileToS3($img, $gallery)
     {
         GLOBAL $url;
-
-/*print_r($data->getMimeType());
-die;*/
 
         // Create an S3 Client object
         $s3 = App::make('aws')->createClient('s3');
@@ -110,13 +106,13 @@ die;*/
         // Send a PutObject request
         $s3->putObject([
             'Bucket' => 'face-on-bucket',
-            'Key'    => $data->getClientOriginalName(),
-            'SourceFile'   => $data->getRealPath(),
-            'ResponseContentType'   => $data->getMimeType(),
-            //'SourceFile'   => 'C:\Users\angsu\Desktop\\' . $data->getClientOriginalName(),            
+            'Key'    => $gallery . '/' . $img->getClientOriginalName(),
+            'SourceFile'   => $img->getRealPath(),
+            'ContentType'   => $img->getMimeType(),
+            'ContentDisposition'   => '',          
         ]);
 
-        $url = $s3->getObjectUrl('face-on-bucket', $data->getClientOriginalName());
+        $url = $s3->getObjectUrl('face-on-bucket', $img->getClientOriginalName());
     }
 
     /**
