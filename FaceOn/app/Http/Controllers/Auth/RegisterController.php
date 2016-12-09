@@ -86,7 +86,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'image' => $url,
-            'gallery_name' => $data['email']
         ]);
     }
 
@@ -115,7 +114,7 @@ class RegisterController extends Controller
             'ContentDisposition'   => '',          
         ]);
 
+        // Assemble the URL for storing in the user table in the db
         $url = $s3->getObjectUrl('face-on-bucket', $key);
-//        $url = $s3->getObjectUrl('face-on-bucket', $img->getClientOriginalName());
     }
 }
