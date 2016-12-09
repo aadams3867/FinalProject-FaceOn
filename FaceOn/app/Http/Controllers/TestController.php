@@ -4,36 +4,26 @@ namespace App\Http\Controllers;         // Custom
 
 use Illuminate\Support\Facades\Auth;    // Custom
 
+class TestController extends Controller
+{
 
     /**
-     * Handle an authentication attempt.
+     * Create a new controller instance.
      *
-     * @return Response
+     * @return void
      */
-    public function authenticate(Request $request)
+    public function __construct()
     {
-
-echo "Hi!";
-die;
-
-
-
-        // Call Kairos API to see if the submitted image is recognized
-/*        KairosController::recognize();*/
-
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            // Db authentication (email & password) passed
-            // Now call Kairos API to see if the submitted image is recognized
-            KairosController::recognize();
-
-            if ($recognized) {
-                // User is recognized!  Login successful.
-                return redirect()->intended('/home');
-            } else {
-                // User is NOT recognized!  Try again.
-/*                alert("User image was not recognized.  Please try again.");*/
-                AuthenticatesUsers::sendFailedLoginResponse($request);
-            }
-
-        }
+        $this->middleware('auth');
     }
+
+    /**
+     * Show the test page for troubleshooting only.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('test');
+    }
+}
