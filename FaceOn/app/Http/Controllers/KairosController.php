@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kairos;
 
 class KairosController extends Controller
 {
-	public $kairos;
+	public $kairos_cred;
 
     /**
      * Create a new controller instance.
@@ -25,20 +26,27 @@ class KairosController extends Controller
      */
     public function index()
     {
-        return view('kairos');
+        return view('kairos_login');
     }
 
     /**
-     * Send a request to Kairos API to see if the image is recognized.
+     * Handle a login request to the application.
      *
-     * @return Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function recognize()
+    public function login(Request $request)
     {
-        GLOBAL $kairos;
+        GLOBAL $kairos_cred;
 
-        echo $kairos;
-        die;
+		$kairos_cred = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
+
+var_dump($kairos_cred);
+die;
+
+        // Call Kairos API to see if the image is recognized
+        Kairos::recognize();
+
     }
 
     /**

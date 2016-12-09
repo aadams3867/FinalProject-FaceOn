@@ -8,7 +8,7 @@
                 <div class="panel-heading">Kairos Login</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/kairos') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/kairos', 'KairosController@index');
+Route::post('/kairos', 'KairosController@login');
 
 Auth::routes();
 

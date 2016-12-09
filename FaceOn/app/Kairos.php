@@ -7,6 +7,7 @@
 // author: Steve Rucker
 //------------------------------------
 
+namespace App;
 
 class Kairos {
 
