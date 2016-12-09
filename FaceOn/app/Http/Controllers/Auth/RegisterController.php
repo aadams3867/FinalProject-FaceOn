@@ -72,7 +72,7 @@ class RegisterController extends Controller
     {
         GLOBAL $url;
 
-        RegisterController::uploadFileToS3($data['image'], $data['email']);
+        RegisterController::uploadFileToS3($data['email'], $data['image']);
 
         return User::create([
             'name' => $data['name'],
@@ -88,7 +88,7 @@ class RegisterController extends Controller
      * @param $data Image filename
      * @return Response
      */
-    public function uploadFileToS3($img, $gallery)
+    public function uploadFileToS3($gallery, $img)
     {
         GLOBAL $url;
 
