@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kairos;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Lang;
 
 class KairosController extends Controller
 {
@@ -72,10 +73,14 @@ class KairosController extends Controller
 		// Login logic
 		if ($jsonDecoded['images'][0]['transaction']['confidence'] >= 0.75) {
 			// Identity verified!
-			echo "VERIFIED!";
+			return redirect()->route('login');
 		} else {
-			// Imposter!
-			echo "Imposter!";
+			// Imposter!  Try again.
+			return redirect()->back()
+            ->withInput($request->only('name', 'gallery_name'))
+            ->withErrors([
+                'image' => Lang::get('auth.failed'),
+            ]);			
 		}
 
     }
