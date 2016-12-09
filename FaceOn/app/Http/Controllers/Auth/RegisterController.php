@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'image' => 'required|max:255',
-            'gallery_name' => 'required|max:255'
+            /*'gallery_name' => 'required|max:255'*/
         ]);
     }
 
@@ -79,14 +79,14 @@ class RegisterController extends Controller
         $halfURL = $gallery . "/" . $img;  // From user input
         $url = Storage::url($halfURL);  // From config/filesystems.php*/
 
-        RegisterController::uploadFileToS3($data['image'], $data['gallery_name']);
+        RegisterController::uploadFileToS3($data['image'], $data['email']);
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'image' => $url,
-            'gallery_name' => $data['gallery_name']
+            'gallery_name' => $data['email']
         ]);
     }
 
@@ -103,15 +103,19 @@ class RegisterController extends Controller
         // Create an S3 Client object
         $s3 = App::make('aws')->createClient('s3');
 
+        // Assemble the 'gallery directory / file name' for S3
+        $key = $gallery . '/' . $img->getClientOriginalName();
+
         // Send a PutObject request
         $s3->putObject([
             'Bucket' => 'face-on-bucket',
-            'Key'    => $gallery . '/' . $img->getClientOriginalName(),
+            'Key'    => $key,
             'SourceFile'   => $img->getRealPath(),
             'ContentType'   => $img->getMimeType(),
             'ContentDisposition'   => '',          
         ]);
 
-        $url = $s3->getObjectUrl('face-on-bucket', $img->getClientOriginalName());
+        $url = $s3->getObjectUrl('face-on-bucket', $key);
+//        $url = $s3->getObjectUrl('face-on-bucket', $img->getClientOriginalName());
     }
 }
