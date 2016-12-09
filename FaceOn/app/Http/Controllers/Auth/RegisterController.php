@@ -91,6 +91,11 @@ class RegisterController extends Controller
         // Enroll the image with Kairos for later facial recognition
         $response = $kairos->enroll($argumentArray);
 
+        // for debugging only
+/*        var_dump($response);
+        ?><br><br><?php
+        die;*/
+
         // Create the new user in the db
         return User::create([
             'name' => $data['name'],
@@ -107,7 +112,7 @@ class RegisterController extends Controller
      * @param string $gallery (User gallery name)
      * @param object $img (initial image data)
      */
-    public function uploadFileToS3($gallery, $img)
+    public static function uploadFileToS3($gallery, $img)
     {
         GLOBAL $url;
 
@@ -126,7 +131,7 @@ class RegisterController extends Controller
             'ContentDisposition'   => '',          
         ]);
 
-        // Assemble the URL for storing in the user table in the db
+        // Assemble the URL for storing in the user table in the db, etc.
         $url = $s3->getObjectUrl('face-on-bucket', $key);
     }
 
