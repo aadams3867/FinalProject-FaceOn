@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/kairos', 'KairosController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

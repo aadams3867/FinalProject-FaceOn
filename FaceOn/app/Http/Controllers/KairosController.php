@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class KairosController extends Controller
 {
+	public $kairos;
+
     /**
      * Create a new controller instance.
      *
@@ -13,7 +15,30 @@ class KairosController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Show the Kairos login.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('kairos');
+    }
+
+    /**
+     * Send a request to Kairos API to see if the image is recognized.
+     *
+     * @return Response
+     */
+    public function recognize()
+    {
+        GLOBAL $kairos;
+
+        echo $kairos;
+        die;
     }
 
     /**
