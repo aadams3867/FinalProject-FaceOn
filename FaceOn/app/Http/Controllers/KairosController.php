@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kairos;
 use App\Http\Controllers\Auth\RegisterController;
-use Illuminate\Support\Facades\Lang;
 
 class KairosController extends Controller
 {
@@ -22,22 +21,12 @@ class KairosController extends Controller
     }
 
     /**
-     * Show the Kairos login.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('kairos_login');
-    }
-
-    /**
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return bool
      */
-    public function login(Request $request)
+    public static function login(Request $request)
     {
         GLOBAL $url, $kairos;
 
@@ -70,17 +59,13 @@ class KairosController extends Controller
 			die;
 		}
 
-		// Login logic
+		// Facial Verification logic
 		if ($jsonDecoded['images'][0]['transaction']['confidence'] >= 0.75) {
-			// Facial verification!  On to Phase 2.
-			return redirect()->route('phase2');
+			// Facial verification successful!
+			return true;
 		} else {
-			// Imposter!  Try again.
-			return redirect()->back()
-            ->withInput($request->only('name', 'gallery_name'))
-            ->withErrors([
-                'image' => Lang::get('auth.failed'),
-            ]);			
+			// Imposter!  Better luck next time.
+            return false;
 		}
 
     }

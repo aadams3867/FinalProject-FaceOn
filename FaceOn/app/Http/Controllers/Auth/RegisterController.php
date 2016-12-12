@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'image' => 'required|max:255',
+            'image' => 'required|max:255|mimes:jpeg, bmp, png',  // Kairos API only accepts these MIME types
             'gallery_name' => 'required|max:255',
         ]);
     }
