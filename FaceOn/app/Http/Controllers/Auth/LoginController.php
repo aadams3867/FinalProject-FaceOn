@@ -73,7 +73,7 @@ class LoginController extends Controller
             $this->username() => 'required',    // Email Address
             'password' => 'required',
             'gallery_name' => 'required',       // Employer Name
-            'image' => 'required|mimes:jpeg, bmp, png'  // Kairos API only accepts these MIME types
+            'image' => 'required|image'
         ]);
     }
 

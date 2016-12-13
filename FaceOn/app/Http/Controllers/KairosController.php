@@ -61,7 +61,7 @@ class KairosController extends Controller
 		}
 
 		// Facial Verification logic
-		if ($jsonDecoded['images'][0]['transaction']['confidence'] >= 0.75) {
+		if ($jsonDecoded['images'][0]['transaction']['confidence'] >= 0.60) {
 			// Facial verification successful!
 			return true;
 		} else {
