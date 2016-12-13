@@ -96,8 +96,13 @@
                             <img id="screenshot" src="">
                             <canvas id="screenshot-canvas" style="display:none;"></canvas>
                             <p>
-                                <button id="screenshot-button" class="glyphicon glyphicon-camera" >Take a Picture</button>
-                                <button id="screenshot-pause-button" class="glyphicon glyphicon-pause" >Pause</button>
+                                <button id="screenshot-button" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
+                                </button>
+{{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
+                                    <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
+                                </button>--}}
                             </p>
                         </div>
 
