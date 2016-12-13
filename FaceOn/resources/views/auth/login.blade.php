@@ -115,9 +115,16 @@
                             </div>
                         </div>
 
-                        <video autoplay></video>
-                        <img src="">
-                        <canvas style="display:none;"></canvas>
+                        <!-- Video display -->
+                        <div style="text-align:center;">
+                            <video id="screenshot-stream" class="video-stream" autoplay></video>
+                            <img id="screenshot" src="">
+                            <canvas id="screenshot-canvas" style="display:none;"></canvas>
+                            <p>
+                                <button id="screenshot-button">Capture</button>
+                                <button id="screenshot-stop-button">Stop</button>
+                            </p>
+                        </div>
 
                         <script>
                             // Photo Booth application with realtime video
