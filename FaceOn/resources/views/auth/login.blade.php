@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="/js/photobooth_min.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -9,41 +10,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
-
-                        <script>
-                            // Checks for the existence of navigator.getUserMedia -- needed for Camera access
-                            function hasGetUserMedia() {
-                                return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                                navigator.mozGetUserMedia || navigator.msGetUserMedia);
-                            }
-
-                            if (hasGetUserMedia()) {
-                                // Good to go!
-                            } else {
-                                alert('getUserMedia() is not supported in your browser');
-                            }
-
-                            // Gaining access to an input device
-                            var errorCallback = function(e) {
-                                console.log('Reeeejected!', e);
-                            };
-
-                            // Cross-browser compatibility
-                            navigator.getUserMedia  = navigator.getUserMedia ||
-                                navigator.webkitGetUserMedia ||
-                                navigator.mozGetUserMedia ||
-                                navigator.msGetUserMedia;
-
-                            var video = document.querySelector('video');
-
-                            if (navigator.getUserMedia) {
-                                navigator.getUserMedia({video: true}, function(stream) {
-                                    video.src = window.URL.createObjectURL(stream);
-                                }, errorCallback);
-                            } else {
-                                video.src = 'trailer.webm'; // fallback.
-                            }
-                        </script>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">User Name</label>
@@ -116,40 +82,24 @@
                         </div>
 
                         <!-- Video display -->
+                        <script>
+                            if( !$( '#screenshot-stream' ).data( "photobooth" ).isSupported ) {
+                                $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
+                                    $("#screenshot").append('<img src="' + dataUrl + '" >');
+                                });
+                            } else {
+                                alert('Your browser does not support getUserMedia(), so the camera function will not work.');
+                            }
+                        </script>
                         <div style="text-align:center;">
                             <video id="screenshot-stream" class="video-stream" autoplay></video>
                             <img id="screenshot" src="">
                             <canvas id="screenshot-canvas" style="display:none;"></canvas>
                             <p>
-                                <button id="screenshot-button">Capture</button>
-                                <button id="screenshot-stop-button">Stop</button>
+                                <button id="screenshot-button" class="glyphicon glyphicon-camera" >Take a Picture</button>
+                                <button id="screenshot-pause-button" class="glyphicon glyphicon-pause" >Pause</button>
                             </p>
                         </div>
-
-                        <script>
-                            // Photo Booth application with realtime video
-                            var video = document.querySelector('video');
-                            var canvas = document.querySelector('canvas');
-                            var ctx = canvas.getContext('2d');
-                            var localMediaStream = null;
-
-                            function snapshot() {
-                                if (localMediaStream) {
-                                    ctx.drawImage(video, 0, 0);
-                                    // "image/webp" works in Chrome.
-                                    // Other browsers will fall back to image/png.
-                                    document.querySelector('img').src = canvas.toDataURL('image/webp');
-                                }
-                            }
-
-                            video.addEventListener('click', snapshot, false);
-
-                            // Not showing vendor prefixes or code that works cross-browser.
-                            navigator.getUserMedia({video: true}, function(stream) {
-                                video.src = window.URL.createObjectURL(stream);
-                                localMediaStream = stream;
-                            }, errorCallback);
-                        </script>
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
