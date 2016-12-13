@@ -10,6 +10,41 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
+                        <script>
+                            // Checks for the existence of navigator.getUserMedia -- needed for Camera access
+                            function hasGetUserMedia() {
+                                return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+                                navigator.mozGetUserMedia || navigator.msGetUserMedia);
+                            }
+
+                            if (hasGetUserMedia()) {
+                                // Good to go!
+                            } else {
+                                alert('getUserMedia() is not supported in your browser');
+                            }
+
+                            // Gaining access to an input device
+                            var errorCallback = function(e) {
+                                console.log('Reeeejected!', e);
+                            };
+
+                            // Cross-browser compatibility
+                            navigator.getUserMedia  = navigator.getUserMedia ||
+                                navigator.webkitGetUserMedia ||
+                                navigator.mozGetUserMedia ||
+                                navigator.msGetUserMedia;
+
+                            var video = document.querySelector('video');
+
+                            if (navigator.getUserMedia) {
+                                navigator.getUserMedia({video: true}, function(stream) {
+                                    video.src = window.URL.createObjectURL(stream);
+                                }, errorCallback);
+                            } else {
+                                video.src = 'trailer.webm'; // fallback.
+                            }
+                        </script>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">User Name</label>
 
@@ -70,7 +105,7 @@
                             <label for="image" class="col-md-4 control-label">Image for Facial Verification</label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" accept="image/*;capture=camera" required>
+                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" accept="image/*" capture="camera" required>
 
                                 @if ($errors->has('image'))
                                     <span class="help-block">
