@@ -109,29 +109,16 @@
             <!-- Video display -->
             <div class="panel panel-default">
                 <div class="panel-heading">Image Capture</div>
-                <div class="panel-body">
-                    <video id="screenshot-stream" class="video-stream" autoplay></video>
-                    <img id="screenshot" src="">
-                    <canvas id="screenshot-canvas" style="display:none;"></canvas>
-                    {{--                            <p>
-                                                    <button id="screenshot-button" type="button" class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
-                                                    </button>--}}
-                    {{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
-                                                        <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
-                                                        <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
-                                                    </button>
-                                                </p>--}}
+                <div class="panel-body" style="text-align: center; min-height: 500px;">
+                    <video id="video-stream" style="width: 265x; height: 200px;"></video>
+                    <p style="margin-bottom: 6px"><button type="button" id="snapPic" class="btn btn-primary"><img src="/img/camerai.png" alt="Camera icon"></button></p>
+                    <div><canvas id="capture"></canvas></div>
+                    <div><img id="canvasImg" alt="Right-click the img to save"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {{-- Scripts --}}
-<script src="/js/photobooth_min.js"></script>
-<script>
-    $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
-        $("#screenshot").append('<img src="' + dataUrl + '" >');
-    });
-</script>
+<script src="/js/photo.js"></script>
 @endsection
