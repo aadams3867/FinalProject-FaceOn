@@ -21,6 +21,14 @@
     </script>
 </head>
 <body>
+
+    <!-- This makes the Bootstrap alert work -->
+    @if (Session::has('status'))
+        <div class="alert-success alert alert-fade">
+            {{Session::get('status')}}
+        </div>
+    @endif
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
