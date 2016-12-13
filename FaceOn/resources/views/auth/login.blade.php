@@ -66,18 +66,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                            <label for="image" class="col-md-4 control-label">Image for Facial Verification</label>
+                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}" style="text-align: center">
+                            <label for="image" class="cameraButton">Take a picture
 
-                            <div class="col-md-6">
-                                <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" accept="image/*" capture="camera" required>
+
+                                <input id="image" type="file" name="image" value="{{ old('image') }}" accept="image/*" capture="camera" required>
 
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
-                            </div>
+
+
+                            </label>
                         </div>
 
                         <div class="form-group">
