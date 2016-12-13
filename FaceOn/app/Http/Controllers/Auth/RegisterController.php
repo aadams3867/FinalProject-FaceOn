@@ -124,7 +124,8 @@ class RegisterController extends Controller
 
         // Send a PutObject request to upload the file to S3
         $s3->putObject([
-            'Bucket' => 'face-on-bucket',
+            'Bucket' => config('filesystems.disks.s3.bucket'),
+            //'Bucket' => 'face-on-bucket',
             'Key'    => $key,
             'SourceFile'   => $img->getRealPath(),
             'ContentType'   => $img->getMimeType(),
