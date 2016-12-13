@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -80,22 +80,6 @@
                             </div>
                         </div>
 
-                        <!-- Video display -->
-                        <div style="text-align:center;">
-                            <video id="screenshot-stream" class="video-stream" autoplay></video>
-                            <img id="screenshot" src="">
-                            <canvas id="screenshot-canvas" style="display:none;"></canvas>
-                            {{--                            <p>
-                                                            <button id="screenshot-button" type="button" class="btn btn-default">
-                                                                <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
-                                                            </button>--}}
-{{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
-                                    <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
-                                </button>
-                            </p>--}}
-                        </div>
-
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -118,6 +102,26 @@
                             </div>
                         @endif
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Video display -->
+            <div class="panel panel-default">
+                <div class="panel-heading">Image Capture</div>
+                <div class="panel-body">
+                    <video id="screenshot-stream" class="video-stream" autoplay></video>
+                    <img id="screenshot" src="">
+                    <canvas id="screenshot-canvas" style="display:none;"></canvas>
+                    {{--                            <p>
+                                                    <button id="screenshot-button" type="button" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
+                                                    </button>--}}
+                    {{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
+                                                        <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
+                                                    </button>
+                                                </p>--}}
                 </div>
             </div>
         </div>
