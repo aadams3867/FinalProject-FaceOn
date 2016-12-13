@@ -23,6 +23,9 @@ Auth::routes();
 // These two routes have to be AFTER Auth::routes() bec they overwrite default routes
 /*Route::get('/login', 'Auth\LoginController@index')->name('login');
 Route::get('/phase2', 'Auth\LoginController@showLoginForm')->name('phase2');*/
+/*Route::group(['middleware' => ['web']], function() {
+   Route::
+});*/
 
 // The following routes require authentication to be viewed:
 

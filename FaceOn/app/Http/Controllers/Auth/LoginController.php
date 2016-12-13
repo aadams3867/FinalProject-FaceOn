@@ -129,7 +129,7 @@ class LoginController extends Controller
         return redirect()->back()
             ->withInput($request->only(['name', 'email', 'gallery_name']))
             ->withErrors([
-                'name' => Lang::get('auth.failed'),
+                Lang::get('auth.failed'),
                 //'name' => Lang::get('validation.custom.username.failed'),
             ]);
     }

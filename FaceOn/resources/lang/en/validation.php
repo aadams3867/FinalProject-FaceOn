@@ -102,7 +102,7 @@ return [
             'rule-name' => 'custom-message',*/
 /*        'validateFace' => [
             'failed' => 'The submitted image does not match our records.',*/
-        ],
+/*        ],*/
     ],
 
     /*
