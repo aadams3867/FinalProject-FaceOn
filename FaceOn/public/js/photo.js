@@ -10,13 +10,14 @@ navigator.getUserMedia  = navigator.getUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia;
 
+// Check to see if the camera will work in the user's browser
 if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, onSuccess, onError);
 } else {
     alert('Your browser does not support getUserMedia(), so the camera will not work.');
 }
 
-// If the user's browser supports getUserMedia(), start streaming video
+// If the user allowed the app to access the camera, start streaming video
 function onSuccess(stream) {
     vidContainer = document.getElementById('video-stream');
     var vidStream;
@@ -32,11 +33,12 @@ function onSuccess(stream) {
     vidContainer.src = vidStream;
 }
 
+// The user denied the app access to the camera
 function onError() {
     alert('There was a problem connecting with your camera.');
 }
 
-// When they click the camera button, capture the image and display it below the button
+// When the user clicks the camera button, capture the image and display it below the button
 function picCapture() {
     var picture = document.getElementById('capture');
     var context = picture.getContext('2d');
@@ -44,7 +46,9 @@ function picCapture() {
     picture.width = "265";
     picture.height = "200";
 
+    // Draw the picture(source, x-coord on canvas, y-coord on canvas, [width], [height])
     context.drawImage(vidContainer, 0, 0, picture.width, picture.height);
+    
 /*    var dataURL = picture.toDataURL();
     document.getElementById('canvasImg').src = dataURL;*/
 }
