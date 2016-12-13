@@ -83,22 +83,18 @@
 
                         <!-- Video display -->
                         <script>
-                            if( !$( '#screenshot-stream' ).data( "photobooth" ).isSupported ) {
-                                $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
-                                    $("#screenshot").append('<img src="' + dataUrl + '" >');
-                                });
-                            } else {
-                                alert('Your browser does not support getUserMedia(), so the camera function will not work.');
-                            }
+                            $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
+                                $("#screenshot").append('<img src="' + dataUrl + '" >');
+                            });
                         </script>
                         <div style="text-align:center;">
                             <video id="screenshot-stream" class="video-stream" autoplay></video>
                             <img id="screenshot" src="">
                             <canvas id="screenshot-canvas" style="display:none;"></canvas>
                             <p>
-                                <button id="screenshot-button" type="button" class="btn btn-default">
+{{--                                <button id="screenshot-button" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
-                                </button>
+                                </button>--}}
 {{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
                                     <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
