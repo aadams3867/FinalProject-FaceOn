@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="/js/photobooth_min.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -82,24 +81,19 @@
                         </div>
 
                         <!-- Video display -->
-                        <script>
-                            $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
-                                $("#screenshot").append('<img src="' + dataUrl + '" >');
-                            });
-                        </script>
                         <div style="text-align:center;">
                             <video id="screenshot-stream" class="video-stream" autoplay></video>
                             <img id="screenshot" src="">
                             <canvas id="screenshot-canvas" style="display:none;"></canvas>
-                            <p>
-{{--                                <button id="screenshot-button" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
-                                </button>--}}
+                            {{--                            <p>
+                                                            <button id="screenshot-button" type="button" class="btn btn-default">
+                                                                <span class="glyphicon glyphicon-camera" aria-hidden=""true></span> Take a Picture
+                                                            </button>--}}
 {{--                                <button id="screenshot-pause-button" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-play" aria-hidden=""true></span> /
                                     <span class="glyphicon glyphicon-pause" aria-hidden=""true></span>
-                                </button>--}}
-                            </p>
+                                </button>
+                            </p>--}}
                         </div>
 
                         <div class="form-group">
@@ -129,4 +123,11 @@
         </div>
     </div>
 </div>
+{{-- Scripts --}}
+<script src="/js/photobooth_min.js"></script>
+<script>
+    $('#screenshot-stream').photobooth().on("image", function (event, dataUrl) {
+        $("#screenshot").append('<img src="' + dataUrl + '" >');
+    });
+</script>
 @endsection
