@@ -51,12 +51,13 @@ class KairosController extends Controller
 
 		// Check for errors
 		if (array_key_exists('Errors', $jsonDecoded)) {
-			echo "ERROR: ";
+			return false;
+		    /*echo "ERROR: ";
 			var_dump($jsonDecoded['Errors'][0]['Message']);
-			?><br><br><?php
-			echo $url;
-			?><br><br><?php
-			die;
+			*/?><!--<br><br><?php
+/*			echo $url;
+			*/?><br><br>--><?php
+/*			die;*/
 		}
 
 		// Facial Verification logic

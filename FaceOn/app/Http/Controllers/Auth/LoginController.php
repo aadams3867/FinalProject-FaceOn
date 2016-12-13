@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\KairosController;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Validation\Rule;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 
 class LoginController extends Controller
@@ -35,9 +35,9 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validateFace($request);          // Validates the face of the user
-
         $this->validateLogin($request);         // Validates the usual credentials
+
+        $this->validateFace($request);          // Validates the face of the user
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -99,10 +99,6 @@ class LoginController extends Controller
         GLOBAL $faceMatch;
 
         return $faceMatch = KairosController::login($request);
-
-/*        if ($faceMatch === false) {
-            return $this->sendFailedLoginResponse($request);
-        }*/
     }
 
     /**
@@ -134,6 +130,7 @@ class LoginController extends Controller
             ->withInput($request->only(['name', 'email', 'gallery_name']))
             ->withErrors([
                 'name' => Lang::get('auth.failed'),
+                //'name' => Lang::get('validation.custom.username.failed'),
             ]);
     }
 
