@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome, {{ Auth::user()->name }}!</div>
+                <div class="panel-heading">Welcome, <strong>{{ Auth::user()->name }}</strong>!</div>
 
                 <div class="panel-body">
                     <?php
@@ -22,7 +22,7 @@
                             ?><p>Your last log out was on <strong>{{ Carbon::createFromFormat('Y-m-d H:i:s', Auth::user()->updated_at)->format('l, m-d-Y, h:i a') }}</strong>.</p><?php
                         }
                     ?>
-                    <p>You are now logged in on <strong>{{ $now }}</strong>.</p>
+                    <p>You are now logged in: <strong>{{ $now }}</strong>.</p>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                            <label for="image" class="col-md-4 control-label">Selfie</label>
+                            <label for="image" class="col-md-4 control-label">Photo ID</label>
 
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" required>
@@ -99,6 +99,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <!-- Video display -->
+            <div class="panel panel-default">
+                <div class="panel-heading">Image Capture</div>
+                <div class="panel-body" style="text-align: center; min-height: 500px;">
+                    <video id="video-stream" style="width: 265x; height: 200px;"></video>
+                    <p style="margin-bottom: 6px"><button type="button" id="snapPic" class="btn btn-primary"><img src="/img/camerai.png" alt="Camera icon"></button></p>
+                    <div><canvas id="capture"></canvas></div>
+                    <div><img id="canvasImg" alt="Right-click the img to save"></div>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>
+{{-- Scripts --}}
+<script src="/js/photo.js"></script>
 @endsection
