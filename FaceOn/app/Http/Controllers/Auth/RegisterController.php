@@ -119,8 +119,8 @@ class RegisterController extends Controller
         // Create an S3 Client object
         $s3 = App::make('aws')->createClient('s3');
 
-        // Assemble the 'gallery directory / file name' for S3
-        $key = $gallery . '/' . $img->getClientOriginalName();
+        // Assemble the 'gallery directory / prefixed file name' for S3
+        $key = $gallery . '/' . time() . '_' . $img->getClientOriginalName();
 
         // Send a PutObject request to upload the file to S3
         $s3->putObject([
