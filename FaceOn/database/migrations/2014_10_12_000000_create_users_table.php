@@ -19,18 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gallery_name');
-            $table->string('image')->unique();
+            $table->string('image');
             $table->rememberToken();
             $table->timestamps();
         });
-
-        /*User::create([
-            'name' => 'Bob',
-            'email' => 'bob@gmail.com',
-            'password' => 'bob123',
-            'gallery_name' => 'Friends1',
-            'image' => 'https://s3.ohio.amazonaws.com/face-on-bucket/Friends1/Bert.jpg'
-        ]);*/
     }
 
     /**
