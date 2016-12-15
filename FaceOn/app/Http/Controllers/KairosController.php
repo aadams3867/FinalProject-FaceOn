@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kairos;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\DB;
 
 class KairosController extends Controller
 {
@@ -30,17 +31,23 @@ class KairosController extends Controller
     {
         GLOBAL $url, $kairos;
 
-        // Upload the image file to Amazon S3
+        // Upload the image file to Amazon S3 and set $url
         RegisterController::uploadFileToS3('verify', $request['image']);
 
-        // Set up Kairos object with credentials
+        // Query db for user credentials
+        $email = $request['email'];
+        $requester = DB::select('select * from users where email = ?', [$email]);
+        $name = $requester[0]->name;
+        $gallery_name = $requester[0]->gallery_name;
+
+        // Set up Kairos object with app credentials
         $kairos = new Kairos(config('kairos_app.id'), config('kairos_app.key'));
 
         // Setup up array of data to submit to Kairos
         $argumentArray = array(
             'image' => $url,
-            'subject_id' => $request['name'],
-            'gallery_name' => $request['gallery_name']
+            'subject_id' => $name,
+            'gallery_name' => $gallery_name
         );
 
         // Call Kairos API to see if the image is verified

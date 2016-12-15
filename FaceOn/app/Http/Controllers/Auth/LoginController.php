@@ -69,10 +69,8 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
             $this->username() => 'required',    // Email Address
             'password' => 'required',
-            'gallery_name' => 'required',       // Employer Name
             'image' => 'required|image'
         ]);
     }
@@ -85,7 +83,7 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        return $request->only('name', $this->username(), 'password', 'gallery_name');
+        return $request->only($this->username(), 'password');
     }
 
     /**
