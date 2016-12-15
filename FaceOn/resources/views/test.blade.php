@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome, {{ Auth::user()->name }}!</div>
+                <div class="panel-heading">Welcome, <strong>{{ Auth::user()->name }}</strong>!</div>
 
                 <div class="panel-body">
-                    <p>This page is only for testing!</p>
+                    <p><strong>This page is only for testing!</strong></p>
                     <hr>
                     <p>View all of my galleries:</p>
                     <?php
@@ -32,8 +32,8 @@
                         var_dump($response);
                         ?><br><br><?php
                     ?>
-                    <hr>
                     <p>
+                    <hr>
                 </div>
             </div>
         </div>
