@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gallery_name');
-            $table->string('image');
+            $table->string('image')->unique();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
             'name' => 'Bob',
             'email' => 'bob@gmail.com',
             'password' => 'bob123',
-            'image' => 'https://s3.ohio.amazonaws.com/face-on-bucket/Friends1/Bert.jpg',
-            'gallery_name' => 'Friends1'
+            'gallery_name' => 'Friends1',
+            'image' => 'https://s3.ohio.amazonaws.com/face-on-bucket/Friends1/Bert.jpg'
         ]);*/
     }
 
