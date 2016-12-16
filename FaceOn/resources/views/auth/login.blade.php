@@ -64,7 +64,7 @@
                             </div>
                         </div>
 
-                        @if (count($errors) > 0)
+{{--                        @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -72,7 +72,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif--}}
                     </form>
                 </div>
             </div>

@@ -124,26 +124,26 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         GLOBAL $faceMatch;
-
+        //['email' => trans($response)]
         if (Session::has('status_fail')) {
             // User has mis-typed email, or not registered yet
             return redirect()->back()
                 ->withInput($request->only(['name', 'email', 'gallery_name']))
-                ->withErrors([
-                    Lang::get('auth.not_found'),
+                ->withErrors(['email' =>
+                    Lang::get('passwords.user'),
                 ]);
         } else if ($faceMatch == false) {
             // Facial verification failed
             return redirect()->back()
                 ->withInput($request->only(['name', 'email', 'gallery_name']))
-                ->withErrors([
+                ->withErrors(['image' =>
                     Lang::get('auth.wrong_face'),
                 ]);
         } else {
             // Password was wrong
             return redirect()->back()
                 ->withInput($request->only(['name', 'email', 'gallery_name']))
-                ->withErrors([
+                ->withErrors(['password' =>
                     Lang::get('auth.wrong_pw'),
                     //'name' => Lang::get('validation.custom.username.failed'),
                 ]);
