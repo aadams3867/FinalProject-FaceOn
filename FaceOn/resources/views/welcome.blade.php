@@ -9,11 +9,9 @@
             </div>
 
             <div class="links">
-                <a href="https://laravel.com/docs">Documentation</a>
-                <a href="https://laracasts.com">Laracasts</a>
-                <a href="https://laravel-news.com">News</a>
-                <a href="https://forge.laravel.com">Forge</a>
-                <a href="https://github.com/laravel/laravel">GitHub</a>
+                <a href="https://github.com/aadams3867" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/angela-adams" target="_blank">LinkedIn</a>
+                <a href="https://stackoverflow.com/users/6513357/anazul" target="_blank">Stack Overflow</a>
             </div>
         </div>
     </div>
