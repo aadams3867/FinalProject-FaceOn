@@ -14,6 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 
     <!-- Styles -->
+    {{-- Bootstrap 3.3.7 --}}
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    {{-- Personal --}}
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
