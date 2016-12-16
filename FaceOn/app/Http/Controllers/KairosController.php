@@ -37,6 +37,15 @@ class KairosController extends Controller
         // Query db for user credentials
         $email = $request['email'];
         $requester = DB::select('select * from users where email = ?', [$email]);
+
+        if ($requester == []) {
+            // User NOT in db yet!
+            request()->session()->flash( 'status_fail',  // Calls the Bootstrap pop-up alert containing fail msg
+                sprintf( 'Email address not found.')
+            );
+            return;
+        }
+
         $name = $requester[0]->name;
         $gallery_name = $requester[0]->gallery_name;
 
@@ -60,7 +69,7 @@ class KairosController extends Controller
 		if (array_key_exists('Errors', $jsonDecoded)) {
 			return false;
 		    /*echo "ERROR: ";
-			var_dump($jsonDecoded['Errors'][0]['Message']);
+			dd($jsonDecoded['Errors'][0]['Message']);
 			*/?><!--<br><br><?php
 /*			echo $url;
 			*/?><br><br>--><?php
@@ -75,13 +84,5 @@ class KairosController extends Controller
 			// Imposter!  Better luck next time.
             return false;
 		}
-
     }
-
-/*
-echo $url;
-?><br><br><?php
-var_dump($data);
-die;*/
-
 }

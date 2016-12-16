@@ -7,8 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\KairosController;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -124,12 +123,31 @@ class LoginController extends Controller
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        return redirect()->back()
-            ->withInput($request->only(['name', 'email', 'gallery_name']))
-            ->withErrors([
-                Lang::get('auth.failed'),
-                //'name' => Lang::get('validation.custom.username.failed'),
-            ]);
+        GLOBAL $faceMatch;
+
+        if (Session::has('status_fail')) {
+            // User has mis-typed email, or not registered yet
+            return redirect()->back()
+                ->withInput($request->only(['name', 'email', 'gallery_name']))
+                ->withErrors([
+                    Lang::get('auth.not_found'),
+                ]);
+        } else if ($faceMatch == false) {
+            // Facial verification failed
+            return redirect()->back()
+                ->withInput($request->only(['name', 'email', 'gallery_name']))
+                ->withErrors([
+                    Lang::get('auth.wrong_face'),
+                ]);
+        } else {
+            // Password was wrong
+            return redirect()->back()
+                ->withInput($request->only(['name', 'email', 'gallery_name']))
+                ->withErrors([
+                    Lang::get('auth.wrong_pw'),
+                    //'name' => Lang::get('validation.custom.username.failed'),
+                ]);
+        }
     }
 
     /**

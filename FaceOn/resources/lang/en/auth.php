@@ -13,7 +13,10 @@ return [
     |
     */
 
-    'failed' => 'At least one credential does not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
+    'not_found' => 'That email address was not found.  Please check your input, or register for the first time.',
+    'wrong_pw' => 'Your password does not match our records.  NSA notified.',
+    'wrong_face' => 'Facial verification failed, you imposter!  Login denied.'
 
 ];
