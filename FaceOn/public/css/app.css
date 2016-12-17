@@ -1,52 +1,56 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+/* Makes the Logo aligned to the left instead of centered*/
+#fh5co-header #fh5co-logo {
+    text-align: left;
+}
 
-html, body {
-    background-color: #fff;
-    color: #636b6f;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 100;
-    height: 100vh;
+/* Makes the always-visible dropdown menu header text a white color */
+#fh5co-header nav ul li a {
+    color: white;
+    text-align: right;
+}
+
+/* Makes the open dropdown menu header text aligned to the right*/
+#fh5co-header nav ul li.open a.dropdown-toggle {
+    /*text-align: right;*/
+    /*float: right;*/
+    /*color: red;*/
+}
+
+/* Makes the dropdown menu text a grey color */
+#fh5co-header nav ul li ul li a {
+    color: #85919d;
+}
+
+/* Makes the dropdown menu smaller and aligned to right*/
+#fh5co-header nav ul li.open ul li {
     margin: 0;
+    text-align: right;
 }
 
-.full-height {
-    height: 100vh;
+/* Puts the dropdown menu underneath*/
+.dropdown-menu {
+    float: none;
 }
 
-.flex-center {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.position-ref {
-    position: relative;
-}
-
-.top-right {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-}
-
-.content {
+/* Centers h3 and Footer text */
+h3, #fh5co-footer .fh5co-footer-widget {
     text-align: center;
 }
 
-.title {
-    font-size: 84px;
+/* Provides for a darker overlay on the background image */
+.fh5co-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #2a2d36;
+    opacity: .54;
+    z-index: 9;
 }
 
-.links > a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.m-b-md {
-    margin-bottom: 30px;
+/* Positions Login and Register panel*/
+.panel-display {
+    z-index: 10;
+    margin-top: 120px;
 }
